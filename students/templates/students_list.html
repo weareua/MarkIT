@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% load static from staticfiles %}
+
+{% block meta_title %}Студенти{% endblock meta_title %}
+
+{% block students_active%}active{%endblock students_active%}
+
+{% block title %}База Студентів{% endblock title %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+ <!-- Add Student Button -->
+<div class="col-xs-4"><a class="btn btn-primary pull-right" id="add-btn" href="{% url "students_add" %}">Додати Студента</a>
+</div>
+{% endif %}
+ <div class="col-xs-12">
+    <!-- Start Students Listing -->
+    <table class="table table-hover table-striped">
+
+        {% comment %} simplify structure with variables {% endcomment %}
+        {% with order_by=request.GET.order_by reverse=request.GET.reverse %}
+
+        <thead>
+            <tr>
+                <th><a href="{% url "home" %}?order_by=id{% if order_by == 'id' and reverse != '1' %}&amp;reverse=1{% endif %}">No
+                    {% if order_by == 'id' and reverse != '1' %}&uarr;
+                    {% elif order_by == 'id' and reverse == '1' %}&darr;
+                    {% endif %}
+                </a></th>
+                <th>Фото</th>
+                <th><a href="{% url "home" %}?order_by=last_name{% if order_by == 'last_name' and reverse != '1' %}&amp;reverse=1{% endif %}">Прізвище
+                    {% if order_by == 'last_name' and reverse != '1' or order_by == '' %}&uarr;
+                    {% elif order_by == 'last_name' and reverse == '1' %}&darr;
+                    {% endif %}
+                </a></th>
+                <th><a href="{% url "home" %}?order_by=first_name{% if order_by == 'first_name' and reverse != '1' %}&amp;reverse=1{% endif %}">Ім'я
+                    {% if order_by == 'first_name' and reverse != '1' %}&uarr;
+                    {% elif order_by == 'first_name' and reverse == '1' %}&darr;
+                    {% endif %}
+                </a></th>
+                <th><a href="{% url "home" %}?order_by=ticket{% if order_by == 'ticket' and reverse != '1' %}&amp;reverse=1{% endif %}">No Білету
+                    {% if order_by == 'ticket' and reverse != '1' %}&uarr;
+                    {% elif order_by == 'ticket' and reverse == '1' %}&darr;
+                    {% endif %}
+                </a></th>
+                <th>Дії</th>
+            </tr>
+        </thead>
+
+        {% endwith %}
+
+        <tbody>
+
+            {% for student in students %}
+
+            <tr>
+                <td>{{ student.id }}</td>
+                <td>
+                    {% if student.photo %}
+                    <img class="img-circle" src="{{ student.photo.url }}" height="30" width="30" />
+                    {% else %}
+                    <img class="img-circle" src="{% static "img/no-photo.jpg" %}" height="30" width="30" />
+                    {% endif %}
+                </td>
+                <td>
+                {% if user.is_authenticated %}
+                <a href="{% url "students_edit" student.id %}" class="student-edit-form-link">
+                {% endif %}
+                {{ student.last_name }}</a>
+                </td>
+                <td>
+                {% if user.is_authenticated %}
+                <a href="{% url "students_edit" student.id %}" class="student-edit-form-link">
+                {% endif %}
+                {{ student.first_name }}
+                </a>
+                </td>
+                <td>{{ student.ticket }}</td>
+                <td>
+                    <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle"
+                        type="button" data-toggle="dropdown">Дія
+                        <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li role="presentation">
+                                <a href="{% url "journal" student.id %}" class="student-edit-form-link">Відвідування</a>
+                            </li>
+                            <li role="presentation">
+                                <a href="{% url "students_edit" student.id %}">Редагувати</a>
+                            </li>
+                            <li role="presentation">
+                                <a href="{% url "students_delete" student.id %}">Видалити</a>
+                            </li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+</div>
+
+{% endblock content %}

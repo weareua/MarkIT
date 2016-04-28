@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="description" content="Система Обліку Студентів Навчального Закладу" />
+        <!-- Include Styles -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap/3.3.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="./css/main.css">
+    </head>
+
+
+    <body>
+        <!-- Start Container -->
+        <div class="container">
+
+            <h1>Форма редагування студента</h1>
+            <table>
+                <tr>
+                    <td class="key">Ім’я</td>
+                    <td class="value"><input type="text" value="Едгар"></td>
+                </tr>
+                <tr>
+                    <td class="key">По-батькові</td>
+                    <td class="value"><input type="text" value="Олександрович"></td>
+                </tr>
+                <tr>
+                    <td class="key">Прізвище*</td>
+                    <td class="value"><input type="text" value="Ґрін"></td>
+                </tr>
+                <tr>
+                    <td class="key">№ Білету*</td>
+                    <td class="value"><input type="text" value="2154"></td>
+                </tr>
+                <tr>
+                    <td class="key">Дата народження</td>
+                    <td class="value"><input type="text" value="1982-07-30"></td>
+                </tr>
+                <tr>
+                    <td class="key">Фото</td>
+                    <td class="value upload">
+                        <ul>
+                            <li>Наразі:<a href="#">secret_archive/me&ultron.jpeg</a><input type="checkbox"></br>Очистити</li>
+                            <li>Змінити:<input type="file" name="jpg" ></li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="key">Група*</td>
+                    <td class="value">
+                <div id="group-selector-form">
+                    <select>
+                        <option value="">МтМ - 21, Подоба Віталій (No 254)</option>
+                        <option value="">МтМ - 22, Корост Андрій (No 2123)</option>
+                    </select>
+                </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="key">Додаткові Нотатки</td>
+                    <td class="value"><textarea rows="5" cols="20" >тест d</textarea></td>
+                </tr>
+            </table>
+
+        </div>
+        <!-- End Container -->
+
+        <!-- Javascripts Section -->
+            <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.js"></script>
+            <script src="https://cdn.jsdelivr.net/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+    </body>
+
+
+</html>

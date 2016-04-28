@@ -1,0 +1,172 @@
+{% load static from staticfiles %}
+
+<!DOCTYPE html>
+<html lang="uk">
+
+
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Система Обліку Студентів - {% block meta_title %}{% endblock meta_title %}</title>
+        <meta name="description" content="Система Обліку Студентів Навчального Закладу" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Include Styles -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap/3.3.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.0.0/css/bootstrap-datetimepicker.min.css">
+
+        <link rel="stylesheet" href="{{ PORTAL_URL }}{% static "css/main.css" %}">
+
+        {% block extra_css %}{% endblock extra_css %}
+
+    </head>
+
+
+    <body>
+        <!-- Start Container -->
+        <div class="container">
+            <!-- Start Header -->
+            <div class="row" id="header">
+                <!-- Logo -->
+                <div class="col-xs-6">
+                    {% block logo %}<a href="{% url "home" %}"><h1>Сервіс Обліку Студентів</h1></a>{% endblock logo %}
+                </div>
+
+                {% if user.is_authenticated %}
+                <!-- Groups Selector -->
+                <div class="col-xs-4" id="group-selector">
+                    <div class="pull-right">
+                        <strong>Група:</strong>
+                        <select>
+                            {% block grouplist %}
+                            <option value="">Усі Студенти</option>
+                            {% for group in GROUPS %}
+                            <option value="{{ group.id }}"{% if group.selected %}selected="1"{% endif %}>{{ group.title }}{% if group.leader %},{{ group.leader }}{% endif %}</option>
+                            {% endfor %}
+                            {% endblock grouplist %}
+                        </select>
+                    </div>
+                </div>
+                <!-- User's toolbar for authenticated users -->
+                <div class="col-xs-2" id="user-toolbar">
+                    <a href="{% url "profile" %}">
+                    {{ user.get_full_name|default:user.username }}</a> |
+                    <a href="{% url "users:auth_logout" %}">Logout</a>
+                </div>
+                {% else %}
+                <!-- User's toolbar for anonymous users -->
+                <div class="col-xs-4" id="user-toolbar">
+                    <a href="{% url "users:auth_login" %}">Login</a> |
+                    <a href="{% url "users:registration_register" %}">Register</a>
+                </div>
+                {% endif %}
+            </div>
+            <!-- End Header -->
+            <!-- Start SubHeader -->
+            <div class="row" id="sub-header">
+                <div class="col-xs-12">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="{%block students_active%}{% endblock %}">
+                            <a href="{% url "home" %}">Студенти</a>
+                        </li>
+                        {% if user.is_authenticated %}
+                        <li role="presentation" class="{%block journal_active%}{% endblock %}">
+
+                            <a href="{% url "journal" %}">Відвідування</a>
+                        </li>
+                        <li role="presentation" class="{%block groups_active%}{% endblock %}">
+
+                            <a href="{% url "groups" %}">Групи</a>
+
+                        </li>
+                        <li role="presentation" class="{%block exams_active%}{% endblock %}">
+
+                            <a href="{% url "exams" %}">Екзамени</a>
+
+                        </li>
+                        {% endif %}
+
+                        {% if perms.auth.add_user %}
+                        <li role="presentation" class="{%block contact_active%}{% endblock %}">
+
+                        <a href="{% url "contact" %}">Контакт</a>
+
+                        </li>
+                        {% endif %}
+
+                    </ul>
+                </div>
+            </div>
+            <!-- End SubHeader -->
+
+            <!-- Start Content Columns -->
+            <div class="row" id="content-columns">
+                <div class="col-xs-12" id="content-column">
+
+                    <!-- Status Message -->
+                    {% block status_message %}
+
+                    {% if messages %}
+                    <div class="alert alert-warning" role="alert">
+                        <ul class="messages">
+                        {% for message in messages %}
+                            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                                {{ message }}
+                            </li>
+                        {% endfor %}
+                        </ul>
+                    </div>
+                    {% endif %}
+
+                    {% endblock %}
+
+                    <div class="col-xs-8"><h2>{% block title %}{% endblock title %}</h2></div>
+                    {% block content %}{% endblock content %}
+
+                </div>
+            </div>
+            <!-- End Content Columns -->
+
+            <!-- Start Footer -->
+            <div id="footer" class="row">
+                <div class="col-xs-12">
+                    {% block footer %} &copy; 2015 Сервіс Обліку Студентів {% endblock footer %}
+                </div>
+            </div>
+            <!-- End Footer -->
+
+        </div>
+        <!-- End Container -->
+
+          <!-- Modal Boilerplate -->
+          <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+               aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal"
+                          aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title" id="myModalLabel"><!-- --></h4>
+                </div>
+                <div class="modal-body"><!-- --></div>
+                <div class="modal-footer"><!-- --></div>
+              </div>
+            </div>
+          </div>
+
+        <!-- Javascripts Section -->
+            <script src="http://code.jquery.com/jquery-latest.js"></script>
+            <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
+            <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js">
+            </script>
+            <script src="{% static "js/jquery.cookie.js" %}"></script>
+            <script src="https://cdn.jsdelivr.net/bootstrap/3.3.0/js/bootstrap.min.js">
+            </script>
+            <script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.0.0/js/bootstrap-datetimepicker.min.js"></script>
+            <script src="{% static "js/main.js" %}"></script>
+            {% block extra_js %}{% endblock extra_js %}
+
+    </body>
+
+
+</html>

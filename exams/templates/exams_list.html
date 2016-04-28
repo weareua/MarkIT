@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% load static from staticfiles %}
+
+{% block meta_title %}Іспити{% endblock meta_title %}
+
+{% block exams_active%}active{%endblock exams_active%}
+
+{% block title %}Іспити{% endblock title %}
+
+{% block content %}
+
+<!-- Add Exam Button -->
+<div class="col-xs-4"><a class="btn btn-primary pull-right" id="add-btn" href="{% url "exams_add" %}">Додати Іспит</a></div>
+<div class="col-xs-12">
+    <!-- Start Exams Listing -->
+    <table class="table table-hover table-striped">
+
+        {% comment %} simplify structure with variables {% endcomment %}
+        {% with order_by=request.GET.order_by reverse=request.GET.reverse %}
+
+        <thead>
+            <tr>
+                <th>
+                    <a href="{% url "exams" %}?order_by=id{% if order_by == 'id' and reverse != '1' %}&amp;reverse=1{% endif %}">No
+                    {% if order_by == 'id' and reverse != '1' %}&uarr;
+                    {% elif order_by == 'id' and reverse == '1' %}&darr;
+                    {% endif %}
+                    </a>
+                </th>
+                <th>
+                    <a href="{% url "exams" %}?order_by=date{% if order_by == 'date' and reverse != '1' %}&amp;reverse=1{% endif %}">Дата
+                    {% if order_by == 'date' and reverse != '1' or order_by == ''%}&uarr;
+                    {% elif order_by == 'date' and reverse == '1' %}&darr;
+                    {% endif %}
+                    </a>
+                </th>
+                <th>
+                    <a href="{% url "exams" %}?order_by=name{% if order_by == 'name' and reverse != '1' %}&amp;reverse=1{% endif %}">Назва предмету
+                    {% if order_by == 'name' and reverse != '1' %}&uarr;
+                    {% elif order_by == 'name' and reverse == '1' %}&darr;
+                    {% endif %}
+                    </a>
+                </th>
+                <th>
+                    <a href="{% url "exams" %}?order_by=exam_group{% if order_by == 'exam_group' and reverse != '1' %}&amp;reverse=1{% endif %}">Екзаменована група
+                    {% if order_by == 'exam_group' and reverse != '1' %}&uarr;
+                    {% elif order_by == 'exam_group' and reverse == '1' %}&darr;
+                    {% endif %}
+                    </a>
+                </th>
+                <th>
+                    <a href="{% url "exams" %}?order_by=lector_name{% if order_by == 'lector_name' and reverse != '1' %}&amp;reverse=1{% endif %}">Викладач
+                    {% if order_by == 'lector_name' and reverse != '1' %}&uarr;
+                    {% elif order_by == 'lector_name' and reverse == '1' %}&darr;
+                    {% endif %}
+                    </a>
+                </th>
+                <th>Дії</th>
+            </tr>
+
+        </thead>
+
+         {% endwith %}
+
+        <tbody>
+
+            {% for exam in object_list %}
+
+            <tr>
+                <td>{{ exam.id }}</td>
+                <td>
+                    <a title="Редагувати" href="{% url "exams_edit" exam.id %}">{{ exam.date }}</a>
+                </td>
+                <td>
+                    <a title="Редагувати" href="{% url "exams_edit" exam.id %}">{{ exam.name }}</a>
+                </td>
+                <td>
+                    <a title="Редагувати" href="{% url "exams_edit" exam.id %}">{{ exam.exam_group }}</a>
+                </td>
+                <td>
+                    <a title="Редагувати" href="{% url "exams_edit" exam.id %}">{{ exam.lector_name }}</a>
+                </td>
+                <td>
+                    <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle"
+                        type="button" data-toggle="dropdown">Дія
+                        <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li role="presentation">
+                                <a role="menuitem" tabindex="-1"
+                                href="#">Відвідування</a>
+                            </li>
+                            <li role="presentation">
+                                <a role="menuitem" tabindex="-1" href="{% url "exams_edit" exam.id %}">Редагувати</a>
+                            </li>
+                            <li role="presentation">
+                                <a role="menuitem" tabindex="-1" href="{% url "exams_delete" exam.id %}">Видалити</a>
+                            </li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+    
+    <!-- End Exams Listing -->
+
+</div>
+
+{% with object_list=object_list %}
+  {% include "pagination.html" %}
+{% endwith %}
+
+{% endblock content %}

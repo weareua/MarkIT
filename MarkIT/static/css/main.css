@@ -1,0 +1,101 @@
+/* Global Styles */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: bold;
+}
+
+.alert {
+/* Ми додали відстань лише зверху елемента: -top */
+    margin-top: 10px;
+}
+
+#add-btn {
+    margin-bottom: 10px;
+    margin-top: 20px;
+}
+
+#footer {
+    border-top: 1px solid #dddddd;
+    /* задаємо внутрішню відстань елемента до верхнього краю */
+    padding-top: 10px;
+}
+
+
+/* Groups Selector */
+#group-selector {
+    margin-top: 30px;
+}
+#group-selector-form select {
+    margin: 0;
+    width: 85%;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    height: 30px;
+    line-height: 30px;
+    color: #555555;
+}
+
+/* journal */
+
+#month {
+text-align:center;
+font-weight: 600;
+}
+
+#shedule {
+border: 1px;
+}
+
+#shedule th {
+text-align:center;
+}
+
+/* form */
+
+ul {
+list-style-type: none;
+}
+.key {
+text-align: right;
+}
+
+.value {
+text-align: left;
+padding: 6px;
+}
+
+.upload li{
+margin-left: -40px;
+}
+
+.upload li:nth-child(2){
+    margin-top: 30px;
+}
+
+.upload input[type="file"] {
+display: inline;
+}
+
+/* Form Styles */
+textarea,
+select,
+input {
+max-width: 300px;
+}
+
+/* Journal Table Styles */
+td.day-box,
+th.day-header {
+padding: 4px !important;
+vertical-align: middle !important;
+text-align: center;
+}
+
+#ajax-progress-indicator {
+display: none;
+}
+
+/* User's Toolbar */
+#user-toolbar {
+margin-top: 30px;
+text-align: right;
+}
