@@ -54,7 +54,7 @@ class MonthJournal(models.Model):
     present_day30 = models.BooleanField(default=False)
     present_day31 = models.BooleanField(default=False)
 
-    def __unicode__(self):
+    def __str__(self):
         return u'%s: %d, %d' % (
             self.student.last_name,
             self.date.month,

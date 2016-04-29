@@ -34,5 +34,5 @@ class Exam(models.Model):
         null=True,
         on_delete=models.PROTECT)
 
-    def __unicode__(self):
+    def __str__(self):
         return u"%s, приймає %s" % (self.name, self.lector_name)

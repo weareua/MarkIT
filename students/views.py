@@ -146,14 +146,14 @@ def students_add(request):
         # return user to form
         return render(
             request,
-            'students/students_add.html',
+            'students_add.html',
             {'groups': Group.objects.all().order_by('title')})
 
 
 # edit student controller
 class StudentUpdateView(SuccessMessageMixin, UpdateView):
     model = Student
-    template_name = 'students/students_edit.html'
+    template_name = 'students_edit.html'
     form_class = StudentUpdateForm
 
     success_message = u"Зміни збережено."
@@ -185,7 +185,7 @@ class StudentUpdateView(SuccessMessageMixin, UpdateView):
 
 class StudentDeleteView(DeleteView):
     model = Student
-    template_name = 'students/students_confirm_delete.html'
+    template_name = 'students_confirm_delete.html'
     success_url = reverse_lazy('home')
     success_message = u"Студент видалений успішно."
 
@@ -207,7 +207,7 @@ def mass_students_delete(request, objects=None):
             objects = Student.objects.filter(pk__in=students_id)
             return render(
                 request,
-                'students/students_confirm_delete.html',
+                'students_confirm_delete.html',
                 {'objects': objects, 'ids': students_id})
     else:
         students_id = request.POST.getlist('values')

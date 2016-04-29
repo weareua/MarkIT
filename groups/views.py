@@ -24,7 +24,7 @@ def groups_list(request):
         if request.GET.get('reverse', '') == '1':
             groups = groups.reverse()
 
-    return render(request, 'groups_list.html')
+    return render(request, 'groups_list.html', {'groups': groups})
 
 
 def groups_add(request):

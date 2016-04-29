@@ -27,7 +27,7 @@ class Group(models.Model):
         blank=True,
         verbose_name=u"Додаткові нотатки")
 
-    def __unicode__(self):
+    def __str__(self):
         if self.leader:
             return u"%s (%s %s)" % (
                 self.title,

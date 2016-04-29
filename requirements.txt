@@ -4,3 +4,4 @@ mysqlclient
 django-crispy-forms
 python-dateutil
 django-registration-redux
+django-el-pagination

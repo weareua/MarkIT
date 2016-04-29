@@ -8,7 +8,6 @@ Technology stack:
  - MySQL/Mariadb as quick and simple solution
 
 TODO:
- - Fix deprecated methods
  - Endless pagination
  - i18n,
  - Registration and permission system
