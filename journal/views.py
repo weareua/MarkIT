@@ -15,7 +15,7 @@ from MarkIT.util import paginate, get_current_group
 
 class JournalView(TemplateView):
 
-    template_name = 'journal/journal.html'
+    template_name = 'journal.html'
 
     def get_context_data(self, **kwargs):
 

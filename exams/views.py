@@ -14,7 +14,7 @@ class ExamsList(ListView):
 
     model = Exam
 
-    template_name = 'exams/exams_list.html'
+    template_name = 'exams_list.html'
 
     def get_queryset(self):
 
@@ -40,7 +40,7 @@ class ExamAddView(SuccessMessageMixin, CreateView):
 
     model = Exam
 
-    template_name = 'exams/exams_add.html'
+    template_name = 'exams_add.html'
 
     form_class = ExamForm
 

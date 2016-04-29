@@ -39,11 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'registration',
+    'crispy_forms',
 
     'students',
     'exams',
     'groups',
     'journal',
+    'accounts',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -134,5 +136,19 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'media')
 
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
+# Use for email sending
+DEFAULT_FROM_EMAIL = 'students_db@happiness.org'
+
 # Settings for django-registration-redux
 REGISTRATION_OPEN = True
+
+# SMTP settings and admin email
+ADMIN_EMAIL = 'weareua@gmail.com'
+EMAIL_HOST = 'smtp.mandrillapp.com'
+EMAIL_PORT = '587'
+EMAIL_HOST_USER = 'weareua@gmail.com'
+# EMAIL_HOST_PASSWORD = passes.MandrillKey
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False

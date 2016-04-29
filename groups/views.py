@@ -24,7 +24,7 @@ def groups_list(request):
         if request.GET.get('reverse', '') == '1':
             groups = groups.reverse()
 
-    return render(request, 'groups/groups_list.html')
+    return render(request, 'groups_list.html')
 
 
 def groups_add(request):
@@ -38,7 +38,7 @@ def groups_edit(request, gid):
 class GroupDeleteView(DeleteView):
 
     model = Group
-    template_name = 'groups/groups_confirm_delete.html'
+    template_name = 'groups_confirm_delete.html'
     success_url = reverse_lazy('home')
     success_message = u"Група видалена успішно."
 

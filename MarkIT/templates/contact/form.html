@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% load static from staticfiles %}
+
+{% load crispy_forms_tags %}
+
+{% block meta_title %}Зв'язок із Адміністратором{% endblock meta_title %}
+
+{% block contact_active%}active{%endblock contact_active%}
+
+{% block title %}Зв'язок із Адміністратором{% endblock title %}
+
+{% block content %}
+
+<div class="col-xs-12">
+
+	{% crispy form %}
+
+</div>
+
+{% endblock content %}

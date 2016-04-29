@@ -8,10 +8,12 @@ Technology stack:
  - MySQL/Mariadb as quick and simple solution
 
 TODO:
+ - Fix deprecated methods
  - Endless pagination
  - i18n,
- - Registration
- - Permission system
+ - Registration and permission system
+ - Marks mechanism
  - Auth with social web
+ - Move to Mysql/Mariadb
  - Tests
- - Android native app with react-mobile
+ - Android native app (django-REST + react-mobile)
