@@ -14,18 +14,20 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 
-from django.conf.urls import patterns, include, url
+from django.conf.urls import include, url
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.views.generic.base import RedirectView, TemplateView
+from django.views.static import serve as debug_serve
 
 from MarkIT.views import ContactView
+from students.views import students_list
 from MarkIT.settings import MEDIA_ROOT, DEBUG
 
 
 urlpatterns = [
 
-    url( r'^$', 'students.views.students_list', name='home'),
+    url( r'^$', students_list, name='home'),
 
     url( r'^students/', include('students.urls')),
     url( r'^groups/', include('groups.urls')),
@@ -48,7 +50,7 @@ urlpatterns = [
 
 if DEBUG:
     # serve files from media folder
-    urlpatterns += patterns(
-        '',
-        url( r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': MEDIA_ROOT}))
+    urlpatterns += [
+        url( r'^media/(?P<path>.*)$', debug_serve, {'document_root': MEDIA_ROOT})
+    ]
 

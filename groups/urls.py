@@ -1,10 +1,10 @@
-from django.conf.urls import include, url
+from django.conf.urls import url
 
-from groups.views import GroupDeleteView
+from groups.views import GroupDeleteView, groups_list, groups_add, groups_edit
 
 urlpatterns = [
-    url( r'^$', 'groups.views.groups_list', name='groups'),
-    url( r'^add/$', 'groups.views.groups_add', name='groups_add'),
-    url( r'^(?P<gid>\d+)/edit/$', 'groups.views.groups_edit', name='groups_edit'),
+    url( r'^$', groups_list, name='groups'),
+    url( r'^add/$', groups_add, name='groups_add'),
+    url( r'^(?P<gid>\d+)/edit/$', groups_edit, name='groups_edit'),
     url( r'^(?P<pk>\d+)/delete/$', GroupDeleteView.as_view(), name='groups_delete'),
 ]
